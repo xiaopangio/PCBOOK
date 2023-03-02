@@ -1,4 +1,4 @@
-del *.pem
+rm *.pem
 # 1.generate CA' private key and self-signed certificate
 openssl req -x509 -newkey rsa:4096 -days 365 -nodes -keyout ca-key.pem -out ca-cert.pem -subj "/C=CH/ST=GANSU/L=LANZHOU/O=LZU/OU=HIGHSCHOOL/CN=*.tech.xiaobai/emailAddress=techschool@gmail.com"
 echo "CA's self-signed certificate"
