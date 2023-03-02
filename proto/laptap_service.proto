@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option go_package = "./;pb";
+
+package techschool.pcbook;
+
+import "filter_message.proto";
+import "laptap_message.proto";
+
+message CreateLaptapRequest {
+    Laptap laptap = 1;
+}
+message CreateLaptapResponse {
+    string id = 1;
+}
+message SearchLaptapRequest{
+    Filter filter = 1;
+}
+message SearchLaptapResponse{
+    Laptap laptap = 1;
+}
+message UploadImageRequest{
+    oneof data{
+        ImageInfo info = 1;
+        bytes chunk_data=2;
+    }
+}
+message ImageInfo {
+    string laptap_id=1;
+    string image_type=2;
+}
+
+message UploadImageResponse {
+    string id =1;
+    uint32 size=2;
+}
+message RateLaptapRequest{
+    string id=1;
+    double score=2;
+}
+message RateLaptapResponse{
+    string id=1;
+    uint32 rate_count=2;
+    double average_score=3;
+}
+service LaptapService{
+    rpc CreateLaptap(CreateLaptapRequest)returns (CreateLaptapResponse);
+    rpc SearchLaptap(SearchLaptapRequest)returns (stream SearchLaptapResponse);
+    rpc UploadImage(stream UploadImageRequest)returns (UploadImageResponse);
+    rpc RateLaptap(stream RateLaptapRequest)returns (stream RateLaptapResponse);
+}

@@ -1,0 +1,60 @@
+{
+  "id":  "e1d4807c-73d0-4600-bf45-ed378c444141",
+  "brand":  "Lenovo",
+  "name":  "Thinkpad P1",
+  "cpu":  {
+    "brand":  "AMD",
+    "name":  "Ryzen 5 PRO 3500u",
+    "numbers_cores":  6,
+    "numbers_threads":  12,
+    "min_ghz":  2.326894357129858,
+    "max_ghz":  4.971841837696777
+  },
+  "ram":  {
+    "value":  "48",
+    "unit":  "GIGABYTE"
+  },
+  "gpus":  [
+    {
+      "brand":  "AMD",
+      "name":  "RX 590",
+      "min_ghz":  1.0031659373499906,
+      "max_ghz":  1.2188437919471897,
+      "memory":  {
+        "value":  "2",
+        "unit":  "GIGABYTE"
+      }
+    }
+  ],
+  "storages":  [
+    {
+      "driver":  "SSD",
+      "memory":  {
+        "value":  "575",
+        "unit":  "GIGABYTE"
+      }
+    },
+    {
+      "driver":  "HDD",
+      "memory":  {
+        "value":  "5",
+        "unit":  "TERABYTE"
+      }
+    }
+  ],
+  "screen":  {
+    "size_inch":  13.594994,
+    "resolution":  {
+      "width":  5484,
+      "height":  3085
+    },
+    "panel":  "OLED"
+  },
+  "keyboard":  {
+    "layout":  "QWERTZ"
+  },
+  "weight_kg":  2.407011217983812,
+  "price_usd":  2521.143052173341,
+  "release_year":  2021,
+  "update_at":  "2023-02-22T11:45:11.373405400Z"
+}
