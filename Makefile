@@ -9,5 +9,5 @@ client:
 test:
 	go test -cover -race ./...
 cert:
-	cd ./cert; sh gen.sh; cd ..
+	cd ./cert; ./gen.sh; cd ..
 .PHONY: gen clean server client test cert
