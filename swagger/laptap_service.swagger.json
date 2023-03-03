@@ -1,0 +1,556 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "laptap_service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "LaptapService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/laptap/create": {
+      "post": {
+        "operationId": "LaptapService_CreateLaptap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pcbookCreateLaptapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pcbookCreateLaptapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LaptapService"
+        ]
+      }
+    },
+    "/v1/laptap/rate": {
+      "post": {
+        "operationId": "LaptapService_RateLaptap",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/pcbookRateLaptapResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of pcbookRateLaptapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pcbookRateLaptapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LaptapService"
+        ]
+      }
+    },
+    "/v1/laptap/search": {
+      "get": {
+        "operationId": "LaptapService_SearchLaptap",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/pcbookSearchLaptapResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of pcbookSearchLaptapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.maxPriceUsd",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "filter.minCouCores",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "filter.minCpuHz",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "filter.minRam.value",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "filter.minRam.unit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "BIT",
+              "BYTE",
+              "KILOBYTE",
+              "MEGABYTE",
+              "GIGABYTE",
+              "TERABYTE"
+            ],
+            "default": "UNKNOWN"
+          }
+        ],
+        "tags": [
+          "LaptapService"
+        ]
+      }
+    },
+    "/v1/laptap/upload_image": {
+      "post": {
+        "operationId": "LaptapService_UploadImage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pcbookUploadImageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pcbookUploadImageRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LaptapService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "KeyboardLayout": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "QWERTY",
+        "QWERTZ",
+        "AZERTY"
+      ],
+      "default": "UNKNOWN"
+    },
+    "MemoryUnit": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "BIT",
+        "BYTE",
+        "KILOBYTE",
+        "MEGABYTE",
+        "GIGABYTE",
+        "TERABYTE"
+      ],
+      "default": "UNKNOWN"
+    },
+    "ScreenPanel": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "IPS",
+        "OLED"
+      ],
+      "default": "UNKNOWN"
+    },
+    "ScreenResolution": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "StorageDriver": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "HDD",
+        "SSD"
+      ],
+      "default": "UNKNOWN"
+    },
+    "pcbookCPU": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "numbersCores": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "numbersThreads": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "minGhz": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxGhz": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "pcbookCreateLaptapRequest": {
+      "type": "object",
+      "properties": {
+        "laptap": {
+          "$ref": "#/definitions/pcbookLaptap"
+        }
+      }
+    },
+    "pcbookCreateLaptapResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "pcbookFilter": {
+      "type": "object",
+      "properties": {
+        "maxPriceUsd": {
+          "type": "number",
+          "format": "double"
+        },
+        "minCouCores": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "minCpuHz": {
+          "type": "number",
+          "format": "double"
+        },
+        "minRam": {
+          "$ref": "#/definitions/pcbookMemory"
+        }
+      }
+    },
+    "pcbookGPU": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "minGhz": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxGhz": {
+          "type": "number",
+          "format": "double"
+        },
+        "memory": {
+          "$ref": "#/definitions/pcbookMemory"
+        }
+      }
+    },
+    "pcbookImageInfo": {
+      "type": "object",
+      "properties": {
+        "laptapId": {
+          "type": "string"
+        },
+        "imageType": {
+          "type": "string"
+        }
+      }
+    },
+    "pcbookKeyboard": {
+      "type": "object",
+      "properties": {
+        "layout": {
+          "$ref": "#/definitions/KeyboardLayout"
+        },
+        "backlit": {
+          "type": "boolean"
+        }
+      }
+    },
+    "pcbookLaptap": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "cpu": {
+          "$ref": "#/definitions/pcbookCPU"
+        },
+        "ram": {
+          "$ref": "#/definitions/pcbookMemory"
+        },
+        "gpus": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/pcbookGPU"
+          }
+        },
+        "storages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/pcbookStorage"
+          }
+        },
+        "screen": {
+          "$ref": "#/definitions/pcbookScreen"
+        },
+        "keyboard": {
+          "$ref": "#/definitions/pcbookKeyboard"
+        },
+        "weightKg": {
+          "type": "number",
+          "format": "double"
+        },
+        "weightLb": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceUsd": {
+          "type": "number",
+          "format": "double"
+        },
+        "releaseYear": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updateAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pcbookMemory": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "unit": {
+          "$ref": "#/definitions/MemoryUnit"
+        }
+      }
+    },
+    "pcbookRateLaptapRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "score": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "pcbookRateLaptapResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "rateCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "averageScore": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "pcbookScreen": {
+      "type": "object",
+      "properties": {
+        "sizeInch": {
+          "type": "number",
+          "format": "float"
+        },
+        "resolution": {
+          "$ref": "#/definitions/ScreenResolution"
+        },
+        "panel": {
+          "$ref": "#/definitions/ScreenPanel"
+        },
+        "multitouch": {
+          "type": "boolean"
+        }
+      }
+    },
+    "pcbookSearchLaptapResponse": {
+      "type": "object",
+      "properties": {
+        "laptap": {
+          "$ref": "#/definitions/pcbookLaptap"
+        }
+      }
+    },
+    "pcbookStorage": {
+      "type": "object",
+      "properties": {
+        "driver": {
+          "$ref": "#/definitions/StorageDriver"
+        },
+        "memory": {
+          "$ref": "#/definitions/pcbookMemory"
+        }
+      }
+    },
+    "pcbookUploadImageRequest": {
+      "type": "object",
+      "properties": {
+        "info": {
+          "$ref": "#/definitions/pcbookImageInfo"
+        },
+        "chunkData": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "pcbookUploadImageResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
