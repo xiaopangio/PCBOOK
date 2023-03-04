@@ -15,192 +15,7 @@
   "produces": [
     "application/json"
   ],
-  "paths": {
-    "/v1/laptap/create": {
-      "post": {
-        "operationId": "LaptapService_CreateLaptap",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pcbookCreateLaptapResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pcbookCreateLaptapRequest"
-            }
-          }
-        ],
-        "tags": [
-          "LaptapService"
-        ]
-      }
-    },
-    "/v1/laptap/rate": {
-      "post": {
-        "operationId": "LaptapService_RateLaptap",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/pcbookRateLaptapResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/rpcStatus"
-                }
-              },
-              "title": "Stream result of pcbookRateLaptapResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "description": " (streaming inputs)",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pcbookRateLaptapRequest"
-            }
-          }
-        ],
-        "tags": [
-          "LaptapService"
-        ]
-      }
-    },
-    "/v1/laptap/search": {
-      "get": {
-        "operationId": "LaptapService_SearchLaptap",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/pcbookSearchLaptapResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/rpcStatus"
-                }
-              },
-              "title": "Stream result of pcbookSearchLaptapResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter.maxPriceUsd",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
-          },
-          {
-            "name": "filter.minCouCores",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "filter.minCpuHz",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
-          },
-          {
-            "name": "filter.minRam.value",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uint64"
-          },
-          {
-            "name": "filter.minRam.unit",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "UNKNOWN",
-              "BIT",
-              "BYTE",
-              "KILOBYTE",
-              "MEGABYTE",
-              "GIGABYTE",
-              "TERABYTE"
-            ],
-            "default": "UNKNOWN"
-          }
-        ],
-        "tags": [
-          "LaptapService"
-        ]
-      }
-    },
-    "/v1/laptap/upload_image": {
-      "post": {
-        "operationId": "LaptapService_UploadImage",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pcbookUploadImageResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "description": " (streaming inputs)",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pcbookUploadImageRequest"
-            }
-          }
-        ],
-        "tags": [
-          "LaptapService"
-        ]
-      }
-    }
-  },
+  "paths": {},
   "definitions": {
     "KeyboardLayout": {
       "type": "string",
@@ -280,14 +95,6 @@
         "maxGhz": {
           "type": "number",
           "format": "double"
-        }
-      }
-    },
-    "pcbookCreateLaptapRequest": {
-      "type": "object",
-      "properties": {
-        "laptap": {
-          "$ref": "#/definitions/pcbookLaptap"
         }
       }
     },
@@ -435,18 +242,6 @@
         }
       }
     },
-    "pcbookRateLaptapRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "score": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
     "pcbookRateLaptapResponse": {
       "type": "object",
       "properties": {
@@ -497,18 +292,6 @@
         },
         "memory": {
           "$ref": "#/definitions/pcbookMemory"
-        }
-      }
-    },
-    "pcbookUploadImageRequest": {
-      "type": "object",
-      "properties": {
-        "info": {
-          "$ref": "#/definitions/pcbookImageInfo"
-        },
-        "chunkData": {
-          "type": "string",
-          "format": "byte"
         }
       }
     },

@@ -1,0 +1,6 @@
+database:
+  root: root
+  password: root
+  ipaddress: localhost
+  port: 3306
+  db_name: pcbook
