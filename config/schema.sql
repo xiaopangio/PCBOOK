@@ -3,12 +3,12 @@ create database if not exists pcbook character set utf8;
 use pcbook;
 create table if not exists role(
     role_id int primary key auto_increment ,
-    role_name varchar(10) not null
+    role_name varchar(10) not null unique
 );
 create table if not exists user(
     user_id int primary key auto_increment,
-    username varchar(15) not null ,
-    hashed_password varchar(100) not null ,
+    username varchar(15) not null unique ,
+    hashed_password varchar(150) not null ,
     role_id int,
     key r_id (role_id),
     constraint r_id foreign key (role_id) references role (role_id)
@@ -24,13 +24,13 @@ create table if not exists cpu(
 );
 create table if not exists memory_unit(
     memory_unit_id int primary key auto_increment,
-    unit_name varchar(10)
+    unit_name varchar(10) unique
 );
 create table if not exists memory(
     memory_id int primary key auto_increment,
     value int ,
-    unit_id int,
-    constraint unit_id foreign key (unit_id) references memory_unit(memory_unit_id)
+    memory_unit_id int,
+    constraint unit_id foreign key (memory_unit_id) references memory_unit(memory_unit_id)
 );
 create table if not exists gpu(
     gpu_id int primary key auto_increment,
@@ -49,7 +49,7 @@ create table if not exists laptap_gpu(
 );
 create table if not exists storage_driver(
   storage_driver_id int primary key,
-  name varchar(10)
+  name varchar(10) unique
 );
 create table if not exists storage(
     storage_id int primary key,
@@ -99,8 +99,8 @@ create table if not exists weight_unit(
 create table if not exists weight(
     weight_id int primary key auto_increment,
     value float,
-    weight_unit int,
-    constraint weight_unit foreign key (weight_id)references weight_unit(weight_unit_id)
+    weight_unit_id int,
+    constraint weight_unit_id foreign key (weight_id)references weight_unit(weight_unit_id)
 );
 create table if not exists laptap(
     laptap_id varchar(20) primary key ,

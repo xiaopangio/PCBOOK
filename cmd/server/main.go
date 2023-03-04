@@ -8,6 +8,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/xiaopangio/pcbook/orm"
 	"github.com/xiaopangio/pcbook/pb"
 	"github.com/xiaopangio/pcbook/service"
 	"google.golang.org/grpc"
@@ -145,11 +146,9 @@ func main() {
 	ratingStore := service.NewInMemoryRatingScore()
 	laptapServer := service.NewLaptapServer(laptapStore, imageStore, ratingStore)
 	//auth
-	userStore := service.NewInMemoryUserStore()
-	err := seedUsers(userStore)
-	if err != nil {
-		log.Fatal("cannot seed users")
-	}
+	//userStore := service.NewInMemoryUserStore()
+	userStore := service.NewDBUserStore(orm.DB)
+
 	jwtManager := service.NewJWTManager(secretKey, tokenDuration)
 	authServer := service.NewAuthServer(userStore, jwtManager)
 	//listen
@@ -162,6 +161,10 @@ func main() {
 		err = runGRPCServer(laptapServer, authServer, jwtManager, *enableTLS, listener)
 		if err != nil {
 			log.Fatal(err)
+		}
+		err := seedUsers(userStore)
+		if err != nil {
+			log.Fatal("cannot seed users: ", err)
 		}
 	} else {
 		err := runRESTServer(*enableTLS, listener, *endpoint)
